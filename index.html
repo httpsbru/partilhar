@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partilhar 💚</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .header {
+      position: relative;
+      min-height: 70vh;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), #121212);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .album-cover {
+      width: 250px;
+      height: 250px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 25px #1db95480;
+    }
+
+    .album-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-top: 10px;
+      color: #1db954;
+      text-shadow: 0 0 10px #1db954;
+    }
+
+    .play-button {
+      width: 55px;
+      height: 55px;
+      background-color: #1db954;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 20px #1db95480;
+    }
+
+    .play-button img {
+      width: 25px;
+      height: 25px;
+      filter: invert(1);
+    }
+
+    .play-button:hover {
+      transform: scale(1.1);
+      background-color: #1ed760;
+    }
+
+    .content {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.8;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1.5s ease;
+    }
+
+    .content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .video-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .video-container.active {
+      width: 320px;
+      height: 180px;
+      box-shadow: 0 0 20px #1db954;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="album-cover">
+      <!-- SUA FOTO AQUI -->
+      <img src="imagem/foto.jpeg" alt="Nossa foto">
+    </div>
+
+
+    <!-- BOTÃO DE PLAY -->
+    <button class="play-button" id="playButton">
+      <img src="imagem/play.png" alt="Play">
+    </button>
+  </div>
+
+  <div class="content" id="textSection">
+    <p>Eu sempre achei que cada música tem um jeito único de fazer a gente sentir…</p>
+    <p>Mas aí você apareceu, e de repente tudo começou a soar diferente.</p>
+    <p>O riso ficou mais leve, o dia mais bonito e até o silêncio ganhou ritmo.</p>
+    <p>Não sei bem em que momento virei fã da sua risada, do seu jeitinho e desse jeito doce que é só seu.</p>
+    <p>Só sei que, de todas as playlists do mundo, você virou a minha favorita. 💖</p>
+  </div>
+
+  <div class="video-container" id="videoContainer">
+    <audio id="musica" src="audio/audio.mp4"></audio>
+
+
+   <script>
+    const playButton = document.getElementById('playButton');
+    const musica = document.getElementById('musica');
+    const textSection = document.getElementById('textSection');
+    let tocando = false;
+
+    playButton.addEventListener('click', () => {
+      if (!tocando) {
+        musica.play();
+        tocando = true;
+      } else {
+        musica.pause();
+        tocando = false;
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      const sectionPos = textSection.getBoundingClientRect().top;
+      const screenPos = window.innerHeight / 1.3;
+      if (sectionPos < screenPos) {
+        textSection.classList.add('visible');
+      }
+    });
+  </script>
+
+</body>
+</html>
